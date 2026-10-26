@@ -55,39 +55,42 @@ const MANUALS = {
    image = picture on the chapter card (put pictures in the src folder, e.g. image: "src/cards/chapter1.jpg"; change the path to change the picture);
    added = "YYYY-MM-DD"; term only for Class 7. */
 const LESSONS = [
-  { cls: 6, no: 1, title: "Numbers", topic: "Number System", image: "src/cards/number-system.svg", desc: "Sample: place value and operations.", duration: "", demo: "src/Videos/Class_6/Class_6_Video1.mp4", added: "" },
-  { cls: 6, no: 2, title: "Introduction to Algebra", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Sample: patterns and variables.", duration: "", demo: "src/Videos/Class_6/Class_6_Video2.mp4", added: "" },
-  { cls: 6, no: 3, title: "Basic Geometry", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Sample: points, lines and angles.", duration: "", demo: "src/Videos/Class_6/Class_6_Video3.mp4", added: "" },
-  { cls: 6, no: 4, title: "Perimeter and Area", topic: "Mensuration", image: "src/cards/mensuration.svg", desc: "Sample: perimeter and area of simple shapes.", duration: "", demo: "src/Videos/Class_6/Class_6_Video4.mp4", added: "" },
+  { cls: 6, no: 1, title: "Algebraic Properties", topic: "Number System", image: "src/cards/number-system.svg", desc: "Properties and rules used in algebra", duration: "", demo: "src/Videos/Class_6/Class_6_Video1.mp4", added: "" },
+  { cls: 6, no: 2, title: "Number Pattern Detection", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Finding and understanding patterns in numbers", duration: "", demo: "src/Videos/Class_6/Class_6_Video2.mp4", added: "" },
+  { cls: 6, no: 3, title: "Length of the shapes", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Finding the length and measurements of shapes", duration: "", demo: "src/Videos/Class_6/Class_6_Video3.mp4", added: "" },
+  { cls: 6, no: 4, title: "Shape Pattern Detection", topic: "Mensuration", image: "src/cards/mensuration.svg", desc: "Finding and understanding patterns in shapes", duration: "", demo: "src/Videos/Class_6/Class_6_Video4.mp4", added: "" },
   
-  { cls: 7, term: 1, no: 1, title: "Number System", topic: "Number System", image: "src/cards/number-system.svg", desc: "Sample: integers and rational numbers.", duration: "", demo: "/src/Videos/Class_7_Term1/Class_7_Term1_Video1.mp4", added: "" },
-  { cls: 7, term: 1, no: 2, title: "Geometry: Lines and Angles", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Sample: pairs of angles.", duration: "", demo: "/src/Videos/Class_7_Term1/Class_7_Term1_Video2.mp4", added: "" },
+  { cls: 7, term: 1, no: 1, title: "Exploring Expressions, Distributive Property and Consecutive Numbers", topic: "Number System", image: "src/cards/number-system.svg", desc: "Numbers	Understanding algebraic expressions, distribution, and number sequences", duration: "", demo: "/src/Videos/Class_7_Term1/Class_7_Term1_Video1.mp4", added: "" },
+  { cls: 7, term: 1, no: 2, title: "Adding Algebraic Expressions and Solving Equations ", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Adding expressions and finding unknown values", duration: "", demo: "/src/Videos/Class_7_Term1/Class_7_Term1_Video2.mp4", added: "" },
   
-  { cls: 7, term: 2, no: 1, title: "Algebraic Expressions", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Sample: terms and like terms.", duration: "", demo: "/src/Videos/Class_7_Term2/Chapter_1/Class_7_term2_chapter_1-video.mp4", added: "" },
-  { cls: 7, term: 2, no: 2, title: "Triangles", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Sample: angle sum property.", duration: "", demo: [
+  { cls: 7, term: 2, no: 1, title: "Numbers in exponential form", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Writing and understanding numbers using powers", duration: "", demo: "/src/Videos/Class_7_Term2/Chapter_1/Class_7_term2_chapter_1-video.mp4", added: "" },
+  { cls: 7, term: 2, no: 2, title: "Laws of exponents", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Basic rules for working with exponents", duration: "", demo: [
     "src/Videos/Class_7_Term2/Chapter_2/Class_7_Term2_Chapter_2_Video1.mp4",
     "src/Videos/Class_7_Term2/Chapter_2/Class_7_Term2_chapter_2 _video2.mp4"
   ], added: "" },
-  { cls: 7, term: 2, no: 3, title: "Triangles", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Sample: angle sum property.", duration: "", demo: "/src/Videos/Class_7_Term2/Chapter_3/class_7_term_2_chapter_3_video.mp4", added: "" },
+  { cls: 7, term: 2, no: 3, title: "Unit digit of a Number in exponential form", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Finding the last digit of powers", duration: "", demo: "/src/Videos/Class_7_Term2/Chapter_3/class_7_term_2_chapter_3_video.mp4", added: "" },
+  { cls: 7, term: 3, no: 1, title: "Geometric Representation of the identity", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Understanding algebraic identities using shapes", duration: "", demo: "src/Videos/Class_7_Term3/class-7-Term-3-video-1.mp4", added: "" },
+  { cls: 7, term: 3, no: 2, title: "Factorisation Using Identities", topic: "Statistics", image: "src/cards/statistics.svg", desc: "Factoring expressions using algebraic identities", duration: "", demo: "src/Videos/Class_7_Term3/class-7-Term-3-video-2.mp4", added: "" },
+  { cls: 7, term: 3, no: 3, title: "Graphical representation of Inequation", topic: "Statistics", image: "src/cards/statistics.svg", desc: "Showing inequalities using graphs", duration: "", demo: "src/Videos/Class_7_Term3/class-7-Term-3-video-3.mp4", added: "" },
+  { cls: 7, term: 3, no: 4, title: "Simple Linear Inequation on a Number Line", topic: "Statistics", image: "src/cards/statistics.svg", desc: "Representing inequalities on a number line", duration: "", demo: "src/Videos/Class_7_Term3/class-7-Term-3-video-4.mp4", added: "" },
+  { cls: 7, term: 3, no: 5, title: "Proving Algebraic Difference Identities", topic: "Statistics", image: "src/cards/statistics.svg", desc: "Verifying algebraic identities involving differences", duration: "", demo: "src/Videos/Class_7_Term3/class-7-Term-3-video-5.mp4", added: "" },
   
-  { cls: 7, term: 3, no: 1, title: "Simple Equations", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Sample: forming and solving equations.", duration: "", demo: "src/Videos/Class_7_Term3/class-7-Term-3-video-1.mp4", added: "" },
-  { cls: 7, term: 3, no: 2, title: "Data Handling", topic: "Statistics", image: "src/cards/statistics.svg", desc: "Sample: mean, median and mode.", duration: "", demo: "src/Videos/Class_7_Term3/class-7-Term-3-video-2.mp4", added: "" },
-  { cls: 7, term: 3, no: 3, title: "Data Handling", topic: "Statistics", image: "src/cards/statistics.svg", desc: "Sample: mean, median and mode.", duration: "", demo: "src/Videos/Class_7_Term3/class-7-Term-3-video-3.mp4", added: "" },
-  { cls: 7, term: 3, no: 4, title: "Data Handling", topic: "Statistics", image: "src/cards/statistics.svg", desc: "Sample: mean, median and mode.", duration: "", demo: "src/Videos/Class_7_Term3/class-7-Term-3-video-4.mp4", added: "" },
-  { cls: 7, term: 3, no: 5, title: "Data Handling", topic: "Statistics", image: "src/cards/statistics.svg", desc: "Sample: mean, median and mode.", duration: "", demo: "src/Videos/Class_7_Term3/class-7-Term-3-video-5.mp4", added: "" },
+ 
+ 
+  { cls: 8, no: 1, title: "Solving a Simple Linear Equation ", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Finding the unknown in a linear equation", duration: "", demo: "/src/Videos/Class_8/class_8_video_1.mp4", added: "" },
+  { cls: 8, no: 2, title: "Product of Monomials", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Multiplying single algebraic terms", duration: "", demo: "/src/Videos/Class_8/class_8_video_2.mp4", added: "" },
+  { cls: 8, no: 3, title: "Expansion of (x + a)³", topic: "Mensuration", image: "src/cards/mensuration.svg", desc: "Expanding the cube of a binomial", duration: "", demo: "/src/Videos/Class_8/class_8_video_3.mp4", added: "" },
+  { cls: 8, no: 4, title: "Graphing Linear Equations", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Drawing linear equations on a graph", duration: "", demo: "/src/Videos/Class_8/class_8_video_4.mp4", added: "" },
+  { cls: 8, no: 5, title: "Product of a Monomial by a Polynomial", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Multiplying a single term by a polynomial", duration: "", demo: "/src/Videos/Class_8/class_8_video_5.mp4", added: "" },
+ 
+  { cls: 9, no: 1, title: "Remainder Theorem", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Finding remainders when dividing polynomials", duration: "", demo: "/src/Videos/Class_9/class_9_video_5.mp4", added: "" },
+  { cls: 9, no: 2, title: "Factorisation", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Breaking expressions into simpler factors", duration: "", demo: "/src/Videos/Class_9/class_9_video_4.mp4", added: "" },
+  { cls: 9, no: 3, title: "Consistency of linear equations", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Checking whether linear equations have solutions", duration: "", demo: "/src/Videos/Class_9/class_9_video_1.mp4", added: "" },
+  { cls: 9, no: 4, title: "Factor theorem", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Using factors to solve polynomial expressions", duration: "", demo: "/src/Videos/Class_9/class_9_video_3.mp4", added: "" },
+  { cls: 9, no: 5, title: "Cross Multiplication", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Solving equations using cross multiplication", duration: "", demo: "/src/Videos/Class_9/class_9_video_2.mp4", added: "" }
   
- 
- 
-  { cls: 8, no: 1, title: "Linear Equations", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Sample: equations in one variable.", duration: "", demo: "/src/Videos/Class_8/class_8_video_1.mp4", added: "" },
-  { cls: 8, no: 2, title: "Quadrilaterals", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Sample: properties of parallelograms.", duration: "", demo: "/src/Videos/Class_8/class_8_video_2.mp4", added: "" },
-  { cls: 8, no: 3, title: "Mensuration", topic: "Mensuration", image: "src/cards/mensuration.svg", desc: "Sample: area of trapezium and surface area.", duration: "", demo: "/src/Videos/Class_8/class_8_video_3.mp4", added: "" },
-  { cls: 8, no: 4, title: "Algebraic Identities", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Sample: standard identities.", duration: "", demo: "/src/Videos/Class_8/class_8_video_4.mp4", added: "" },
-  { cls: 8, no: 5, title: "Product of Monomial", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Sample: standard identities.", duration: "", demo: "/src/Videos/Class_8/class_8_video_5.mp4", added: "" },
- 
-  { cls: 9, no: 1, title: "Polynomials", topic: "Algebra", image: "src/cards/algebra.svg", desc: "Sample: zeros and factor theorem.", duration: "", demo: "/src/Videos/Class_9/class_9_video_1.mp4", added: "" },
-  { cls: 9, no: 2, title: "Coordinate Geometry", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Sample: plotting points and graphs.", duration: "", demo: "/src/Videos/Class_9/class_9_video_2.mp4", added: "" },
-  { cls: 9, no: 3, title: "Triangles and Congruence", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Sample: congruence criteria.", duration: "", demo: "/src/Videos/Class_9/class_9_video_3.mp4", added: "" },
-  { cls: 9, no: 4, title: "Circles", topic: "Geometry", image: "src/cards/geometry.svg", desc: "Sample: chords and angles in a circle.", duration: "", demo: "/src/Videos/Class_9/class_9_video_4.mp4", added: "" }
+  
+  
 ];
 /* Workshop carousel: the photos of the Teachers' workshop. Add or change paths here (pictures live in the src folder). */
 const WORKSHOP_PHOTOS = ["src/workshop-3.jpg", "src/workshop-2.jpg", "src/workshop-4.jpg", "src/workshop-1.jpg", "src/workshop-5.jpg", "src/workshop-6.jpg"];
