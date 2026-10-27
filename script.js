@@ -3,6 +3,7 @@ const SITE = {
   tagline: "Mathematics Education through Digital and Human-centred AI",
   logoSrc: "",                // e.g. "src/logo.png" or a full image URL. Empty = temporary text placeholder.
   copyright: "© 2026 MEDHA Project. All rights reserved.",
+  geogebraPracticeUrl: "https://www.geogebra.org", // GeoGebra interactive math practice destination
   social: [],                 // e.g. [{label:"YouTube", url:"https://youtube.com/..."}] – shown only if filled
   contact: {
     email: "shanthi@cse.sastra.edu",                // e.g. "medha@example.edu"
@@ -118,21 +119,198 @@ let state = { cls: null, term: null };
 document.querySelectorAll("[data-tagline]").forEach(e => e.textContent = "Mathematics · Classes 6–9");
 document.querySelectorAll("[data-logo]").forEach(e => { if (SITE.logoSrc) { e.innerHTML = '<img alt="MEDHA logo" src="' + esc(SITE.logoSrc) + '">' } else e.innerHTML = "∑" });
 $("#copy").textContent = SITE.copyright + " Temporary placeholder logo shown until the official logo is added.";
+const pBtn = $("#geogebraPracticeBtn");
+if (pBtn && SITE.geogebraPracticeUrl) pBtn.href = SITE.geogebraPracticeUrl;
 $("#social").innerHTML = SITE.social.length ? "<b>Follow us</b>" + SITE.social.map(s => `<a href="${esc(s.url)}" rel="noopener" target="_blank">${esc(s.label)}</a>`).join("") : "";
 $("#menuBtn").onclick = () => { const n = $("#nav"), o = n.classList.toggle("open"); $("#menuBtn").setAttribute("aria-expanded", o); if (o && window.updateNavIndicator) window.updateNavIndicator(); };
 document.querySelectorAll("nav a").forEach(a => a.onclick = () => { $("#nav").classList.remove("open"); $("#menuBtn").setAttribute("aria-expanded", false) });
 
-/* about, vision, contact */
-$("#aboutIntro").textContent = ABOUT.intro;
-const block = i => `<div class="card"><h3>${esc(i.t)}</h3><p style="margin:0">${i.d ? esc(i.d) : TBD}</p></div>`;
-$("#aboutGrid").innerHTML = ABOUT.items.map(block).join("");
-$("#visionGrid").innerHTML = VISION.map((i, k) => `<div class="card vcard"><h3 id="vh${k}">${esc(i.t)}</h3><div class="vbody" tabindex="0" role="region" aria-labelledby="vh${k}"><p style="margin:0">${i.d ? esc(i.d) : TBD}</p></div></div>`).join("");
+/* contact */
 const C = SITE.contact;
 $("#contactGrid").innerHTML = [
   ["Email", C.email ? `<a href="mailto:${esc(C.email)}">${esc(C.email)}</a>` : null],
   ["Phone", C.phone ? `<a href="tel:${esc(C.phone)}">${esc(C.phone)}</a>` : null],
   ["Institution", C.institution ? esc(C.institution) + (C.address ? "<br>" + esc(C.address) : "") : null]
 ].map(([t, v]) => `<div class="card"><h3>${t}</h3><p style="margin:0">${v || TBD}</p></div>`).join("");
+
+/* ===== Interactive "About the MEDHA Project" Section ===== */
+(function initAboutInteractions() {
+  // 1. Overview panel expand/collapse
+  const aboutToggleBtn = document.getElementById("aboutToggleBtn");
+  const aboutFullDesc = document.getElementById("aboutFullDesc");
+  if (aboutToggleBtn && aboutFullDesc) {
+    aboutToggleBtn.addEventListener("click", () => {
+      const isExpanded = aboutToggleBtn.getAttribute("aria-expanded") === "true";
+      aboutToggleBtn.setAttribute("aria-expanded", !isExpanded);
+      aboutFullDesc.hidden = isExpanded;
+      const textSpan = aboutToggleBtn.querySelector(".toggle-text");
+      if (textSpan) {
+        textSpan.textContent = isExpanded ? "Explore the Programme" : "Show Less";
+      }
+    });
+  }
+
+  // 2. Mission card expand/collapse
+  const missionToggleBtn = document.getElementById("missionToggleBtn");
+  const missionFull = document.getElementById("missionFull");
+  if (missionToggleBtn && missionFull) {
+    missionToggleBtn.addEventListener("click", () => {
+      const isExpanded = missionToggleBtn.getAttribute("aria-expanded") === "true";
+      missionToggleBtn.setAttribute("aria-expanded", !isExpanded);
+      missionFull.hidden = isExpanded;
+      const textSpan = missionToggleBtn.querySelector(".toggle-text");
+      if (textSpan) {
+        textSpan.textContent = isExpanded ? "Discover Our Mission" : "Show Less";
+      }
+    });
+  }
+
+  // 3. Learning Objectives: Interactive cards, progress tracker & "Expand/Collapse All"
+  const objCards = document.querySelectorAll(".obj-card");
+  const objProgressText = document.getElementById("objProgressText");
+  const objProgressBar = document.getElementById("objProgressBar");
+  const objToggleAllBtn = document.getElementById("objToggleAllBtn");
+  const exploredObjectives = new Set();
+  const totalObjectives = objCards.length || 8;
+
+  function updateProgress() {
+    const count = exploredObjectives.size;
+    const pct = Math.round((count / totalObjectives) * 100);
+    if (objProgressText) {
+      objProgressText.textContent = `Explored ${count} of ${totalObjectives} objectives (${pct}%)`;
+    }
+    if (objProgressBar) {
+      objProgressBar.style.width = `${pct}%`;
+      const track = objProgressBar.closest(".obj-progress-track");
+      if (track) track.setAttribute("aria-valuenow", count);
+    }
+  }
+
+  function toggleCard(card, forceState) {
+    const isExpanded = typeof forceState === "boolean" ? !forceState : card.getAttribute("aria-expanded") === "true";
+    const newState = !isExpanded;
+    card.setAttribute("aria-expanded", newState);
+    const ind = card.querySelector(".obj-indicator");
+    if (ind) ind.textContent = newState ? "−" : "+";
+
+    if (newState) {
+      const idx = card.getAttribute("data-index");
+      if (idx) {
+        exploredObjectives.add(idx);
+        card.classList.add("is-explored");
+        updateProgress();
+      }
+    }
+  }
+
+  objCards.forEach(card => {
+    card.addEventListener("click", () => toggleCard(card));
+    card.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggleCard(card);
+      }
+    });
+  });
+
+  if (objToggleAllBtn) {
+    objToggleAllBtn.addEventListener("click", () => {
+      const isAllExpanded = objToggleAllBtn.getAttribute("aria-expanded") === "true";
+      const targetState = !isAllExpanded;
+      objToggleAllBtn.setAttribute("aria-expanded", targetState);
+      objToggleAllBtn.textContent = targetState ? "Collapse All" : "Expand All";
+
+      objCards.forEach(card => {
+        toggleCard(card, targetState);
+        if (targetState) {
+          const idx = card.getAttribute("data-index");
+          if (idx) exploredObjectives.add(idx);
+          card.classList.add("is-explored");
+        }
+      });
+      updateProgress();
+    });
+  }
+
+  // 4. Target Groups (Participants & Beneficiaries) toggles
+  document.querySelectorAll(".target-toggle-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.getAttribute("aria-controls");
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        const isExpanded = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", !isExpanded);
+        targetEl.hidden = isExpanded;
+        const textSpan = btn.querySelector(".toggle-text");
+        if (textSpan) {
+          textSpan.textContent = isExpanded ? "Explore Details" : "Show Less";
+        }
+      }
+    });
+  });
+
+  // 5. Educational Benefits: Click / Enter to expand card
+  const benefitCards = document.querySelectorAll(".benefit-card");
+  benefitCards.forEach(card => {
+    const toggle = () => {
+      const isExpanded = card.getAttribute("aria-expanded") === "true";
+      card.setAttribute("aria-expanded", !isExpanded);
+    };
+    card.addEventListener("click", toggle);
+    card.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+
+  // 6. Educational Impact: Click / Enter to expand step details
+  const impactSteps = document.querySelectorAll(".impact-step");
+  impactSteps.forEach(step => {
+    const toggle = () => {
+      const isExpanded = step.getAttribute("aria-expanded") === "true";
+      step.setAttribute("aria-expanded", !isExpanded);
+    };
+    step.addEventListener("click", toggle);
+    step.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+
+  // 7. Subnav pill highlight on scroll
+  const subnavPills = Array.from(document.querySelectorAll(".about-subnav .subnav-pill"));
+  const subnavBlocks = subnavPills.map(p => {
+    const id = p.getAttribute("href")?.slice(1);
+    return id ? document.getElementById(id) : null;
+  }).filter(Boolean);
+
+  if (subnavPills.length && subnavBlocks.length) {
+    function updateSubnav() {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      const offset = 180;
+      let activeIndex = 0;
+      subnavBlocks.forEach((block, i) => {
+        if (scrollY + offset >= block.offsetTop) {
+          activeIndex = i;
+        }
+      });
+      subnavPills.forEach((p, i) => {
+        p.classList.toggle("active", i === activeIndex);
+        if (i === activeIndex) {
+          p.setAttribute("aria-current", "true");
+        } else {
+          p.removeAttribute("aria-current");
+        }
+      });
+    }
+    window.addEventListener("scroll", updateSubnav, { passive: true });
+    updateSubnav();
+  }
+})();
 
 /* lessons */
 const label = l => "Class " + l.cls + (l.term ? " · Term " + l.term : "");
@@ -550,7 +728,7 @@ renderClasses(); renderResults(); renderRecent();
 
   function observeReveals() {
     const targets = document.querySelectorAll(
-      "#home, .reveal-header:not(.is-revealed), .cls:not(.is-revealed), .card:not(.is-revealed), .manual-card:not(.is-revealed), .car:not(.is-revealed), footer:not(.is-revealed)"
+      "#home, .reveal-header:not(.is-revealed), .cls:not(.is-revealed), .card:not(.is-revealed), .manual-card:not(.is-revealed), .car:not(.is-revealed), .practice-eyebrow:not(.is-revealed), .practice-actions:not(.is-revealed), .practice-frame:not(.is-revealed), footer:not(.is-revealed)"
     );
     targets.forEach(el => revealObs.observe(el));
   }
