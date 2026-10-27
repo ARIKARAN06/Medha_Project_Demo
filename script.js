@@ -3,7 +3,7 @@ const SITE = {
   tagline: "Mathematics Education through Digital and Human-centred AI",
   logoSrc: "",                // e.g. "src/logo.png" or a full image URL. Empty = temporary text placeholder.
   copyright: "© 2026 MEDHA Project. All rights reserved.",
-  geogebraPracticeUrl: "https://www.geogebra.org", // GeoGebra interactive math practice destination
+  geogebraPracticeUrl: "https://www.geogebra.org/calculator", // GeoGebra interactive math practice destination
   social: [],                 // e.g. [{label:"YouTube", url:"https://youtube.com/..."}] – shown only if filled
   contact: {
     email: "shanthi@cse.sastra.edu",                // e.g. "medha@example.edu"
@@ -15,15 +15,35 @@ const SITE = {
 const ABOUT = {
   intro: "MEDHA is a capacity-building initiative that supports high school mathematics teachers and students in understanding Mathematics through digital resources and human-centred AI.",
   items: [
-    { t: "About the Project", d: "MEDHA offers chapter-wise Mathematics video lessons and GeoGebra demonstrations for Classes 6–9, and workshops for mathematics teachers." },
-    { t: "Vision and Mission", d: "To transform Mathematics education through AI-driven, inclusive, and innovative learning.To empower teachers with AI tools and digital resources for effective, equitable, and engaging Mathematics education." },
-    { t: "Learning Objectives", d: null },
-    { t: "Target Students", d: "School students in Classes 6, 7, 8 and 9, along with their teachers and parents." },
-    { t: "Educational Benefits", d: null }
-  ]                            // d:null shows a “to be added” note – replace with your text
+    {
+      t: "About the Project",
+      d: "MEDHA is a structured Professional Development Programme designed to build Technological Pedagogical Content Knowledge (TPACK) among mathematics teachers through the integrated use of dynamic mathematics software and human-centered Artificial Intelligence tools.\n\nThe programme focuses on two industry-standard platforms: GeoGebra and Desmos, integrated with Generative AI assistants. While GeoGebra and Desmos enable visual exploration and dynamic conceptual understanding, Generative AI is used as a thought partner for lesson design, item generation, and creation of differentiated resources — keeping the teacher at the center of pedagogical decision-making."
+    },
+    {
+      t: "Vision and Mission",
+      d: "To transform Mathematics education through AI-driven, inclusive, and innovative learning.\n\n To empower teachers with AI tools and digital resources for effective, equitable, and engaging Mathematics education."
+    },
+    {
+      t: "Learning Objectives",
+      d: "By the end of the training, teachers will be able to:\n\n• Understand the role of AI and digital tools in modern mathematics teaching.\n\n• Use GeoGebra to create geometric constructions, graphs, and dynamic models.\n\n• Use Desmos to plot functions, build sliders, and design interactive classroom activities.\n\n• Use AI tools to generate lesson plans, questions, examples, and assessments.\n\n• Design activities that promote exploration, pattern recognition, and problem solving.\n\n• Integrate these tools into the existing curriculum in a practical, time-efficient way.\n\n• Evaluate student understanding using digital and interactive assessments.\n\n• Share and adapt ready-made resources from GeoGebra and Desmos communities."
+    },
+    {
+      t: "Target Students",
+      d: "Primary participants (trainees): School mathematics teachers, upper primary to higher secondary, from government, aided, and private schools. Teacher educators and B.Ed. trainees may also join.\n\nUltimate beneficiaries: Students in classes 6 to 12, who will learn algebra, geometry, trigonometry, coordinate geometry, functions, and calculus through interactive visual methods. The approach suits learners of mixed ability, including those who find mathematics difficult and those who want deeper challenge."
+    },
+    {
+      t: "Educational Benefits",
+      d: "• Better visualisation: Abstract concepts such as functions, transformations, and loci become clear through dynamic diagrams.\n\n• Active learning: Students experiment with sliders and constructions and discover rules themselves.\n\n• Time saving for teachers: AI helps prepare worksheets, quizzes, and lesson ideas quickly.\n\n• Instant feedback: Students can check ideas immediately and correct misconceptions.\n\n• Personalised learning: Activities can be adapted to different levels and learning speeds.\n\n• Free and accessible tools: GeoGebra and Desmos are free and work on phones, tablets, and computers.\n\n• Teacher professional growth: Builds digital competence and confidence in new pedagogy."
+    }
+  ]
 };
 const VISION = [
-  { t: "Our Vision", d: "To transform school Mathematics education through Digital and Human-Centred Artificial Intelligence (AI), fostering conceptual understanding, logical reasoning, creativity, and problem-solving skills among students, while building an inclusive, innovative, and future-ready learning ecosystem." }, { t: "Our Mission", d: "To empower school Mathematics teachers, particularly those teaching Grades VI–XII, through structured training and hands-on exposure to AI tools, digital applications, and innovative pedagogical practices. MEDHA aims to promote AI-assisted lesson planning, assessment, mathematical concept visualization, and digital teaching material development; address classroom learning challenges through AI-based solutions; and establish a sustainable ecosystem of reusable educational resources and collaborative innovation to improve Mathematics teaching and learning, with particular emphasis on equitable access for rural and underserved schools." }, { t: "Educational Impact", d: null }
+  { t: "Our Vision", d: "To transform school Mathematics education through Digital and Human-Centred Artificial Intelligence (AI), fostering conceptual understanding, logical reasoning, creativity, and problem-solving skills among students, while building an inclusive, innovative, and future-ready learning ecosystem." },
+  { t: "Our Mission", d: "To empower school Mathematics teachers, particularly those teaching Grades VI–XII, through structured training and hands-on exposure to AI tools, digital applications, and innovative pedagogical practices. MEDHA aims to promote AI-assisted lesson planning, assessment, mathematical concept visualization, and digital teaching material development; address classroom learning challenges through AI-based solutions; and establish a sustainable ecosystem of reusable educational resources and collaborative innovation to improve Mathematics teaching and learning, with particular emphasis on equitable access for rural and underserved schools." },
+  {
+    t: "Educational Impact",
+    d: "• Improved understanding: Students move from rote learning to conceptual understanding and reasoning.\n\n• Higher engagement: Interactive lessons raise interest, participation, and curiosity in mathematics.\n\n• Reduced fear of maths: Visual and playful exploration makes the subject less intimidating.\n\n• Multiplier effect: Each trained teacher reaches hundreds of students and can mentor colleagues, so the impact spreads across schools.\n\n• Long-term outcomes: Stronger problem-solving, analytical, and digital skills that prepare students for higher studies."
+  }
 ];
 /* GeoGebra Manual PDFs: ONE manual card per class (Classes 6, 8, 9). Class 7 has one per TERM (shown only after a term is selected).
    List the available PDF files for each class/term. Left empty = the Manual card shows "PDF not added yet". */
@@ -125,192 +145,51 @@ $("#social").innerHTML = SITE.social.length ? "<b>Follow us</b>" + SITE.social.m
 $("#menuBtn").onclick = () => { const n = $("#nav"), o = n.classList.toggle("open"); $("#menuBtn").setAttribute("aria-expanded", o); if (o && window.updateNavIndicator) window.updateNavIndicator(); };
 document.querySelectorAll("nav a").forEach(a => a.onclick = () => { $("#nav").classList.remove("open"); $("#menuBtn").setAttribute("aria-expanded", false) });
 
-/* contact */
+/* about, vision, contact */
+$("#aboutIntro").textContent = ABOUT.intro;
+const renderCardContent = d => {
+  if (!d) return TBD;
+  if (!d.includes("\n")) return `<p class="card-para" style="margin:0">${esc(d)}</p>`;
+  const rawLines = d.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+  const out = [];
+  let currentList = null;
+  for (const line of rawLines) {
+    if (line.startsWith("•")) {
+      if (!currentList) {
+        currentList = [];
+        out.push({ type: "list", items: currentList });
+      }
+      currentList.push(line);
+    } else {
+      currentList = null;
+      out.push({ type: "para", text: line });
+    }
+  }
+  return out.map(item => {
+    if (item.type === "list") {
+      return `<ul class="card-list">${item.items.map(l => `<li class="card-bullet">${esc(l)}</li>`).join("")}</ul>`;
+    }
+    return `<p class="card-para">${esc(item.text)}</p>`;
+  }).join("");
+};
+const block = (i, k) => `<div class="card abcard"><h3 id="ah${k}">${esc(i.t)}</h3><div class="abody" tabindex="0" role="region" aria-labelledby="ah${k}">${renderCardContent(i.d)}</div></div>`;
+$("#aboutGrid").innerHTML = ABOUT.items.map(block).join("");
+$("#visionGrid").innerHTML = VISION.map((i, k) => `<div class="card vcard"><h3 id="vh${k}">${esc(i.t)}</h3><div class="vbody" tabindex="0" role="region" aria-labelledby="vh${k}">${renderCardContent(i.d)}</div></div>`).join("");
 const C = SITE.contact;
+const contactIcons = {
+  Email: '<svg class="contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>',
+  Phone: '<svg class="contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+  Institution: '<svg class="contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>'
+};
 $("#contactGrid").innerHTML = [
   ["Email", C.email ? `<a href="mailto:${esc(C.email)}">${esc(C.email)}</a>` : null],
   ["Phone", C.phone ? `<a href="tel:${esc(C.phone)}">${esc(C.phone)}</a>` : null],
   ["Institution", C.institution ? esc(C.institution) + (C.address ? "<br>" + esc(C.address) : "") : null]
-].map(([t, v]) => `<div class="card"><h3>${t}</h3><p style="margin:0">${v || TBD}</p></div>`).join("");
-
-/* ===== Interactive "About the MEDHA Project" Section ===== */
-(function initAboutInteractions() {
-  // 1. Overview panel expand/collapse
-  const aboutToggleBtn = document.getElementById("aboutToggleBtn");
-  const aboutFullDesc = document.getElementById("aboutFullDesc");
-  if (aboutToggleBtn && aboutFullDesc) {
-    aboutToggleBtn.addEventListener("click", () => {
-      const isExpanded = aboutToggleBtn.getAttribute("aria-expanded") === "true";
-      aboutToggleBtn.setAttribute("aria-expanded", !isExpanded);
-      aboutFullDesc.hidden = isExpanded;
-      const textSpan = aboutToggleBtn.querySelector(".toggle-text");
-      if (textSpan) {
-        textSpan.textContent = isExpanded ? "Explore the Programme" : "Show Less";
-      }
-    });
-  }
-
-  // 2. Mission card expand/collapse
-  const missionToggleBtn = document.getElementById("missionToggleBtn");
-  const missionFull = document.getElementById("missionFull");
-  if (missionToggleBtn && missionFull) {
-    missionToggleBtn.addEventListener("click", () => {
-      const isExpanded = missionToggleBtn.getAttribute("aria-expanded") === "true";
-      missionToggleBtn.setAttribute("aria-expanded", !isExpanded);
-      missionFull.hidden = isExpanded;
-      const textSpan = missionToggleBtn.querySelector(".toggle-text");
-      if (textSpan) {
-        textSpan.textContent = isExpanded ? "Discover Our Mission" : "Show Less";
-      }
-    });
-  }
-
-  // 3. Learning Objectives: Interactive cards, progress tracker & "Expand/Collapse All"
-  const objCards = document.querySelectorAll(".obj-card");
-  const objProgressText = document.getElementById("objProgressText");
-  const objProgressBar = document.getElementById("objProgressBar");
-  const objToggleAllBtn = document.getElementById("objToggleAllBtn");
-  const exploredObjectives = new Set();
-  const totalObjectives = objCards.length || 8;
-
-  function updateProgress() {
-    const count = exploredObjectives.size;
-    const pct = Math.round((count / totalObjectives) * 100);
-    if (objProgressText) {
-      objProgressText.textContent = `Explored ${count} of ${totalObjectives} objectives (${pct}%)`;
-    }
-    if (objProgressBar) {
-      objProgressBar.style.width = `${pct}%`;
-      const track = objProgressBar.closest(".obj-progress-track");
-      if (track) track.setAttribute("aria-valuenow", count);
-    }
-  }
-
-  function toggleCard(card, forceState) {
-    const isExpanded = typeof forceState === "boolean" ? !forceState : card.getAttribute("aria-expanded") === "true";
-    const newState = !isExpanded;
-    card.setAttribute("aria-expanded", newState);
-    const ind = card.querySelector(".obj-indicator");
-    if (ind) ind.textContent = newState ? "−" : "+";
-
-    if (newState) {
-      const idx = card.getAttribute("data-index");
-      if (idx) {
-        exploredObjectives.add(idx);
-        card.classList.add("is-explored");
-        updateProgress();
-      }
-    }
-  }
-
-  objCards.forEach(card => {
-    card.addEventListener("click", () => toggleCard(card));
-    card.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        toggleCard(card);
-      }
-    });
-  });
-
-  if (objToggleAllBtn) {
-    objToggleAllBtn.addEventListener("click", () => {
-      const isAllExpanded = objToggleAllBtn.getAttribute("aria-expanded") === "true";
-      const targetState = !isAllExpanded;
-      objToggleAllBtn.setAttribute("aria-expanded", targetState);
-      objToggleAllBtn.textContent = targetState ? "Collapse All" : "Expand All";
-
-      objCards.forEach(card => {
-        toggleCard(card, targetState);
-        if (targetState) {
-          const idx = card.getAttribute("data-index");
-          if (idx) exploredObjectives.add(idx);
-          card.classList.add("is-explored");
-        }
-      });
-      updateProgress();
-    });
-  }
-
-  // 4. Target Groups (Participants & Beneficiaries) toggles
-  document.querySelectorAll(".target-toggle-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const targetId = btn.getAttribute("aria-controls");
-      const targetEl = document.getElementById(targetId);
-      if (targetEl) {
-        const isExpanded = btn.getAttribute("aria-expanded") === "true";
-        btn.setAttribute("aria-expanded", !isExpanded);
-        targetEl.hidden = isExpanded;
-        const textSpan = btn.querySelector(".toggle-text");
-        if (textSpan) {
-          textSpan.textContent = isExpanded ? "Explore Details" : "Show Less";
-        }
-      }
-    });
-  });
-
-  // 5. Educational Benefits: Click / Enter to expand card
-  const benefitCards = document.querySelectorAll(".benefit-card");
-  benefitCards.forEach(card => {
-    const toggle = () => {
-      const isExpanded = card.getAttribute("aria-expanded") === "true";
-      card.setAttribute("aria-expanded", !isExpanded);
-    };
-    card.addEventListener("click", toggle);
-    card.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        toggle();
-      }
-    });
-  });
-
-  // 6. Educational Impact: Click / Enter to expand step details
-  const impactSteps = document.querySelectorAll(".impact-step");
-  impactSteps.forEach(step => {
-    const toggle = () => {
-      const isExpanded = step.getAttribute("aria-expanded") === "true";
-      step.setAttribute("aria-expanded", !isExpanded);
-    };
-    step.addEventListener("click", toggle);
-    step.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        toggle();
-      }
-    });
-  });
-
-  // 7. Subnav pill highlight on scroll
-  const subnavPills = Array.from(document.querySelectorAll(".about-subnav .subnav-pill"));
-  const subnavBlocks = subnavPills.map(p => {
-    const id = p.getAttribute("href")?.slice(1);
-    return id ? document.getElementById(id) : null;
-  }).filter(Boolean);
-
-  if (subnavPills.length && subnavBlocks.length) {
-    function updateSubnav() {
-      const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const offset = 180;
-      let activeIndex = 0;
-      subnavBlocks.forEach((block, i) => {
-        if (scrollY + offset >= block.offsetTop) {
-          activeIndex = i;
-        }
-      });
-      subnavPills.forEach((p, i) => {
-        p.classList.toggle("active", i === activeIndex);
-        if (i === activeIndex) {
-          p.setAttribute("aria-current", "true");
-        } else {
-          p.removeAttribute("aria-current");
-        }
-      });
-    }
-    window.addEventListener("scroll", updateSubnav, { passive: true });
-    updateSubnav();
-  }
-})();
+].map(([t, v]) => {
+  const icon = contactIcons[t] || "";
+  const content = v ? `<div class="contact-row"><span class="contact-icon-wrap">${icon}</span><span class="contact-val">${v}</span></div>` : TBD;
+  return `<div class="card contact-card"><h3>${t}</h3>${content}</div>`;
+}).join("");
 
 /* lessons */
 const label = l => "Class " + l.cls + (l.term ? " · Term " + l.term : "");
