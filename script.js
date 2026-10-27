@@ -5,8 +5,8 @@ const SITE = {
   copyright: "© 2026 MEDHA Project. All rights reserved.",
   social: [],                 // e.g. [{label:"YouTube", url:"https://youtube.com/..."}] – shown only if filled
   contact: {
-    email: "",                // e.g. "medha@example.edu"
-    phone: "",
+    email: "shanthi@cse.sastra.edu",                // e.g. "medha@example.edu"
+    phone: "0435-2426823",
     institution: "SASTRA Deemed to be University – Srinivasa Ramanujan Centre",
     address: ""
   }
